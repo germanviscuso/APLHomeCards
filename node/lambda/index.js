@@ -1,6 +1,3 @@
-// This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK (v2).
-// Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
-// session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
 const smallImg = 'https://s3-eu-west-1.amazonaws.com/happybirthday-alexa/garlands_720x480_card_small.png';
@@ -11,9 +8,9 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = 'Bienvenidos! Dime hola';
+        const speechText = '<lang xml:lang="en-US">Say hello</lang>, <lang xml:lang="es-ES">Dime hola</lang>';
         return handlerInput.responseBuilder
-            .withSimpleCard('Tarjeta Simple', 'Esta es una tarjeta simple ahora en APL') // <--
+            .withSimpleCard('Simple Card/ Tarjeta Simple', 'Lorem ipsum dolor sit amet, consectetur adipiscing') // <--
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
@@ -26,21 +23,22 @@ const HelloWorldIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
     },
     handle(handlerInput) {
-        const speechText = 'Hola Mundo!';
+        const speechText = '<lang xml:lang="en-US">Hello World</lang>, <lang xml:lang="es-ES">Hola Mundo</lang>';
         return handlerInput.responseBuilder
-            .withStandardCard('Tarjeta Estandar', 'Esta es una tarjeta estandar ahora en APL', smallImg, largeImg) // <--
+            .withStandardCard('Standard Card / Tarjeta Estandar', 'Lorem ipsum dolor sit amet, consectetur adipiscing', smallImg, largeImg) // <--
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
     }
 };
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speechText = 'Me puedes decir hola. Como te puedo ayudar?';
+        const speechText = '<lang xml:lang="en-US">You can say hello. How can I help you?</lang> <lang xml:lang="es-ES">Puedes decir hola. Cómo te puedo ayudar?</lang>';
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -48,6 +46,7 @@ const HelpIntentHandler = {
             .getResponse();
     }
 };
+
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -55,12 +54,13 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = 'Adios!';
+        const speechText = 'Bye bye';
         return handlerInput.responseBuilder
             .speak(speechText)
             .getResponse();
     }
 };
+
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
@@ -81,7 +81,7 @@ const IntentReflectorHandler = {
     },
     handle(handlerInput) {
         const intentName = handlerInput.requestEnvelope.request.intent.name;
-        const speechText = `Acabas de activar ${intentName}`;
+        const speechText = `${intentName}`;
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -99,7 +99,7 @@ const ErrorHandler = {
     },
     handle(handlerInput, error) {
         console.log(`~~~~ Error handled: ${error.message}`);
-        const speechText = `Perdona, hubo un error. Inténtalo otra vez.`;
+        const speechText = 'Error!';
 
         return handlerInput.responseBuilder
             .speak(speechText)
