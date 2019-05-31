@@ -48,7 +48,7 @@ const APLHomeCardRequestInterceptor = {
 
 function supportsAPL(handlerInput) {
     const {supportedInterfaces} = handlerInput.requestEnvelope.context.System.device;
-    return supportedInterfaces['Alexa.Presentation.APL'] ? true : false;
+    return supportedInterfaces['Alexa.Presentation.APL'];
 }
 
 const APLDoc = 
@@ -77,7 +77,7 @@ const APLDoc =
             }
         },
         {
-            "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+            "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
             "dimensions": {
             "myTextTopPadding": "50dp"
             }
@@ -172,7 +172,7 @@ const APLDoc =
                                 ]
                             },
                             {
-                                "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                                "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                                 "type": "Container",
                                 "width": "100vw",
                                 "height": "90vh",
