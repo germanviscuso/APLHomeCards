@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.lucarosellini</groupId>
+    <artifactId>apl-home-cards</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <ask.sdk.version>2.18.0</ask.sdk.version>
+    </properties>
+
+    <!-- CHANGE ME -->
+    <name>Alexa Custom Skill</name>
+
+    <!-- CHANGE ME -->
+    <url>http://www.myorganization.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.amazon.alexa</groupId>
+            <artifactId>ask-sdk</artifactId>
+            <version>${ask.sdk.version}</version>
+            <exclusions>
+                <!-- Remove the following exclusion if you need servlet support -->
+                <exclusion>
+                    <groupId>com.amazon.alexa</groupId>
+                    <artifactId>ask-sdk-servlet-support</artifactId>
+                </exclusion>
+                <!-- Add the following exclusion if you do not need AWS Lambda support -->
+                <!--exclusion>
+                    <groupId>com.amazon.alexa</groupId>
+                    <artifactId>ask-sdk-lambda-support</artifactId>
+                </exclusion-->
+
+                <!-- DynamoDB dependency has a HUGE footprint in the final JAR!
+                     Add the following exclusion if you don't need dynamodb persistence -->
+                <exclusion>
+                    <groupId>com.amazon.alexa</groupId>
+                    <artifactId>ask-sdk-dynamodb-persistence-adapter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.28.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

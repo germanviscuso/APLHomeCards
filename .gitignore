@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+#Intellij project files
+.idea
+
+#maven target repo
+target/
