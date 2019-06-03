@@ -25,8 +25,6 @@ public class HelloWorldIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
-        logger.info("HelloWorldIntentHandler");
-
         ResourceBundle messageBundle = messageBundle(handlerInput);
 
         return handlerInput.getResponseBuilder()

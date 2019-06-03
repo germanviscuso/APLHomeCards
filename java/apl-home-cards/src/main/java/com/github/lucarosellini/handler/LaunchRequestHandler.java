@@ -17,7 +17,6 @@ import static com.github.lucarosellini.util.Utils.messageBundle;
 public class LaunchRequestHandler implements RequestHandler {
     private static final Logger logger = LogManager.getLogger(LaunchRequestHandler.class);
 
-
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
         return handlerInput.matches(Predicates.requestType(LaunchRequest.class));
@@ -25,7 +24,6 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
-        logger.info("LaunchRequestHandler");
         ResourceBundle messageBundle = messageBundle(handlerInput);
 
         return handlerInput.getResponseBuilder()
