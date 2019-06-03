@@ -46,9 +46,28 @@ const APLHomeCardRequestInterceptor = {
     }
 }
 
-function supportsAPL(handlerInput) {
+function supportsAPL(handlerInput){
     const {supportedInterfaces} = handlerInput.requestEnvelope.context.System.device;
-    return supportedInterfaces['Alexa.Presentation.APL'] ? true : false;
+    return supportedInterfaces['Alexa.Presentation.APL'];
+}
+
+function deviceType(handlerInput){
+    if(supportsAPL(handlerInput)){
+        const {Viewport} = handlerInput.requestEnvelope.context;
+        const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
+        switch(resolution){
+            case "480x480": return "EchoSpot";
+            case "960x480": return "EchoShow5";
+            case "1024x600": return "EchoShow";
+            case "1200x800": return "FireHD8";
+            case "1280x800": return "EchoShow2";
+            case "1920x1080": return "FireTV";
+            case "1920x1200": return "FireHD10";
+            default: return "unknown";
+        }
+    } else {
+        return "screenless";
+    }
 }
 
 const APLDoc = 
@@ -77,7 +96,7 @@ const APLDoc =
             }
         },
         {
-            "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+            "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
             "dimensions": {
             "myTextTopPadding": "50dp"
             }
@@ -172,7 +191,7 @@ const APLDoc =
                                 ]
                             },
                             {
-                                "when": "${@viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
+                                "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium || @viewportProfile == @hubLandscapeLarge || @viewportProfile == @tvLandscapeXLarge}",
                                 "type": "Container",
                                 "width": "100vw",
                                 "height": "90vh",

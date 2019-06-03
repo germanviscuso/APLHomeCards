@@ -54,9 +54,10 @@ const CancelAndStopIntentHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = 'Bye bye';
+        const speechText = '<lang xml:lang="en-US">Bye bye</lang>';
         return handlerInput.responseBuilder
             .speak(speechText)
+            .withShouldEndSession(true)
             .getResponse();
     }
 };
