@@ -21,7 +21,9 @@ def add_apl_home_card(handler_input, response, images=None, apl_document_name=No
             background_small = images['Standard']['small']
             background_large = images['Standard']['large']
         else:
-            pass
+            local_card_content = ''
+            background_small = ''
+            background_large = ''
 
         handler_input.response_builder.add_directive(RenderDocumentDirective(
             document=_load_apl_document(apl_document_name), datasources={
