@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import json
+import logging
 
 from ask_sdk_core.utils.request_util import get_supported_interfaces
 from ask_sdk_model.interfaces.alexa.presentation.apl import RenderDocumentDirective
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 def add_apl_home_card(handler_input, response, images=None, apl_document_name=None):
@@ -35,7 +39,6 @@ def _load_apl_document(file_path):
         with open(file_path) as f:
             return json.load(f)
     except IOError as e:
-        print(f'Error: {e}')
-        print(f'Error Code: {e.errno}')
+        logger.info(f'Error: {e}')
+        logger.info(f'Error Code: {e.errno}')
         raise e
-
