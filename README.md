@@ -9,6 +9,21 @@ A way to wrap the response builder to transparently send home card like response
 - Recommended resolutions and size limitations for small and large images in home cards are described [here](https://developer.amazon.com/docs/custom-skills/include-a-card-in-your-skills-response.html#image_size)
 - In the file aplcard.js you'll find the APL document that gets rendered. There's a default background image for simpple cards (where no images are passed as parameters). Please replace with your own default background
 
+## Java
+- Enable APL in the voice interaction model Interfaces section
+- Import the following dependency:
+
+```
+<dependency>
+    <groupId>com.github.lucarosellini.alexa</groupId>
+    <artifactId>apl-home-cards</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+- In you skill builder, add a request interceptor like this: ```.addRequestInterceptor(new APLHomeCardInterceptor())```
+- Just use home cards as usual! (```.withSimpleCard(...)```, ```.withStandardCard(...)```)
+
 ## Python
 - Enable APL in the voice interaction model Interfaces section.
 - Add *APLHomeCard.py* to the project.
