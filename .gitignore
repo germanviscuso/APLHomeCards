@@ -62,6 +62,17 @@ typings/
 
 #Intellij project files
 .idea
+*.iml
+
+#MacOS DS_Store
+.DS_Store
+
+#Eclipse project files
+.classpath
+.factorypath
+.project
+.settings/
+*.asc
 
 #maven target repo
 target/

@@ -3,8 +3,8 @@ package com.github.lucarosellini;
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
+import com.github.lucarosellini.alexa.interceptor.APLHomeCardInterceptor;
 import com.github.lucarosellini.handler.*;
-import com.github.lucarosellini.interceptor.APLHomeCardInterceptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
