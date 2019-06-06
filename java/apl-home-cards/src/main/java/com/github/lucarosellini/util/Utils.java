@@ -27,45 +27,6 @@ public class Utils {
     private static final Logger logger = LogManager.getLogger(LaunchRequestHandler.class);
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public static Field getField(Class clazz, String fieldName) throws NoSuchFieldException {
-        try {
-            return clazz.getDeclaredField(fieldName);
-        } catch (NoSuchFieldException e) {
-            Class superClass = clazz.getSuperclass();
-            if (superClass == null) {
-                throw e;
-            } else {
-                return getField(superClass, fieldName);
-            }
-        }
-    }
-
-    public static void makePublic(Field field) {
-        if (!Modifier.isPublic(field.getModifiers()) ||
-                !Modifier.isPublic(field.getDeclaringClass().getModifiers())) {
-            field.setAccessible(true);
-        }
-    }
-
-    public static boolean supportsAPL(HandlerInput handlerInput) {
-        try {
-            return handlerInput.getRequestEnvelope().getContext().getSystem().getDevice()
-                    .getSupportedInterfaces().getAlexaPresentationAPL() != null;
-        } catch (Exception e) {
-            logger.error("Cannot detect APL", e);
-            return false;
-        }
-    }
-
-    public static Map<String, Object> resourceToMap(String fileName) throws URISyntaxException, IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                OBJECT_MAPPER.getClass().getResourceAsStream("/" + fileName)
-        ))) {
-            return OBJECT_MAPPER.readValue(reader, new TypeReference<HashMap<String, Object>>() {
-            });
-        }
-    }
-
     @SuppressWarnings("unchecked")
     private static <T extends Request> T castRequest(HandlerInput handlerInput, Class<T> clazz) {
         return (T) handlerInput.getRequestEnvelope().getRequest();
